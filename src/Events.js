@@ -5,12 +5,16 @@ import moment from "moment";
 
 const Events = (props) => {
   const [events, setEvents] = useState([]);
+  const [lastChecked, setLastChecked] = useState(moment().format());
 
   useEffect(() => {
-    retrieveEvents();
+    setInterval(() => {
+      console.log("mook");
+      setLastChecked(moment().format());
+    }, 2000000);
   }, []);
 
-  const retrieveEvents = () => {
+  useEffect(() => {
     EventDataServce.getAll()
       .then((res) => {
         setEvents(res.data);
@@ -18,7 +22,7 @@ const Events = (props) => {
       .catch((e) => {
         console.log(e);
       });
-  };
+  }, [lastChecked]);
 
   return (
     <Segment inverted compact>
@@ -37,6 +41,8 @@ const Events = (props) => {
           );
         })}
       </List>
+      <br />
+      Last Updated: {moment(lastChecked).fromNow()}
     </Segment>
   );
 };
