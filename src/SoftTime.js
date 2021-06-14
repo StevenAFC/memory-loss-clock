@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import moment from "moment";
 
-const SoftTime = () => {
+function getSoftTime() {
   const format = "hh:mm:ss";
   const time = moment();
 
@@ -29,7 +29,19 @@ const SoftTime = () => {
     message = "Night Time";
   }
 
-  return <span> {message} </span>;
+  return message;
+}
+
+const SoftTime = () => {
+  const [softTime, setSoftTime] = useState(getSoftTime());
+
+  useEffect(() => {
+    setInterval(() => {
+      setSoftTime(getSoftTime());
+    }, 1000);
+  });
+
+  return <span> {softTime} </span>;
 };
 
 export default SoftTime;

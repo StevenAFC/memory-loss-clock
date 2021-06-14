@@ -6,7 +6,7 @@ import Date from "./Date";
 import { Container, Header, Icon } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 
-Moment.startPooledTimer("interval={1000}");
+Moment.startPooledTimer("interval={100}");
 
 function App() {
   return (
@@ -34,7 +34,7 @@ function App() {
       </style>
 
       <Header inverted size="huge">
-        It's <Day />
+        <Day /> -
         <SoftTime />
       </Header>
 
