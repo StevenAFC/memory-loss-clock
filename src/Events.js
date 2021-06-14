@@ -42,7 +42,9 @@ const Events = (props) => {
         })}
       </List>
       <br />
-      Last Updated: {moment(lastChecked).fromNow()}
+      <span style={{ color: "#616161" }}>
+        Last Updated: {moment(lastChecked).fromNow()}
+      </span>
     </Segment>
   );
 };
