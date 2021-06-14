@@ -29,7 +29,7 @@ const SoftTime = () => {
     message = "Night Time";
   }
 
-  return <div>{message}</div>;
+  return <span> {message} </span>;
 };
 
 export default SoftTime;

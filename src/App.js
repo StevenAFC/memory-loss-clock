@@ -1,23 +1,57 @@
 import Moment from "react-moment";
-import "./App.css";
 import Day from "./Day";
 import Time from "./Time";
 import SoftTime from "./SoftTime";
 import Date from "./Date";
+import { Container, Header, Icon } from "semantic-ui-react";
+import "semantic-ui-css/semantic.min.css";
 
-Moment.startPooledTimer("interval={100}");
+Moment.startPooledTimer("interval={1000}");
 
 function App() {
   return (
-    <div className="App">
-      <Day />
-      <br />
-      <SoftTime />
-      <br />
-      <Time />
-      <br />
-      <Date />
-    </div>
+    <Container fluid textAlign="center">
+      <style>
+        {`
+      html, body {
+        background-color: #252839 !important;
+      }
+      p {
+        align-content: center;
+        background-color: #495285;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 6em;
+      }
+      p > span {
+        opacity: 0.4;
+        text-align: center;
+      }
+    }
+    `}
+      </style>
+
+      <Header inverted size="huge">
+        It's <Day />
+        <SoftTime />
+      </Header>
+
+      <Header as="h1" inverted size="huge">
+        <Header.Content>
+          <Icon name="clock outline" />
+          <Time />
+        </Header.Content>
+      </Header>
+
+      <Header as="h1" inverted size="huge">
+        <Header.Content>
+          <Icon name="calendar alternate outline" />
+          <Date />
+        </Header.Content>
+      </Header>
+    </Container>
   );
 }
 
