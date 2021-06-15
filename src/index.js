@@ -12,7 +12,6 @@ ReactDOM.render(
 );
 
 setInterval(() => {
-  console.log("rloadings");
   window.location.reload();
 }, 21600000);
 
