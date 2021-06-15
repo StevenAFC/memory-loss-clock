@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import EventDataServce from "./services/events-service";
 import { Segment, List } from "semantic-ui-react";
 import moment from "moment";
+import Moment from "react-moment";
 
 const Events = (props) => {
   const [events, setEvents] = useState([]);
@@ -26,15 +27,37 @@ const Events = (props) => {
 
   return (
     <Segment inverted compact>
-      <List divided inverted size="large">
+      <style>
+        {`
+      .today {
+        color: yellow !important;
+        }
+      }
+    `}
+      </style>
+      <List celled inverted size="large">
         {events.map((e) => {
+          let today = moment(parseInt(e.date.$date.$numberLong)).isSame(
+            new Date(),
+            "day"
+          );
+
           return (
-            <List.Item key={e._id.$oid}>
+            <List.Item key={e._id.$oid} className={today ? "today" : null}>
               <List.Icon name={e.icon} verticalAlign="middle" />
               <List.Content>
                 <List.Header>{e.name}</List.Header>
                 <List.Description>
-                  Due {moment(parseInt(e.date.$date.$numberLong)).fromNow()}
+                  {today ? (
+                    "Due today!"
+                  ) : (
+                    <span>
+                      Due&nbsp;
+                      <Moment fromNow>
+                        {parseInt(e.date.$date.$numberLong)}
+                      </Moment>
+                    </span>
+                  )}
                 </List.Description>
               </List.Content>
             </List.Item>
@@ -42,8 +65,9 @@ const Events = (props) => {
         })}
       </List>
       <br />
-      <span style={{ color: "#616161" }}>
-        Last Updated: {moment(lastChecked).fromNow()}
+      <span style={{ color: "#424242" }}>
+        Last Updated:&nbsp;
+        <Moment fromNow>{lastChecked}</Moment>
       </span>
     </Segment>
   );
