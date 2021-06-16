@@ -32,7 +32,7 @@ const Event = ({ open, onClose, event }) => {
         <Modal.Description>
           <Header>
             <p>
-              This event will be&nbsp;
+              This event is on&nbsp;
               {!today ? (
                 <Moment format="dddd" className="important">
                   {parseInt(event && event.date.$date.$numberLong)}
