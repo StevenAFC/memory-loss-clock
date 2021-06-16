@@ -6,6 +6,9 @@ import moment from "moment";
 const Event = ({ open, onClose, event }) => {
   let time = parseInt(event && event.date.$date.$numberLong);
   let today = moment(time).isSame(new Date(), "day");
+  let tomorrow = moment(time).isSame(moment().add(1, "days"), "day");
+
+  console.log(tomorrow);
 
   return (
     <Modal
@@ -48,26 +51,30 @@ const Event = ({ open, onClose, event }) => {
                 </React.Fragment>
               ) : null}
               &nbsp;which is&nbsp;
-              <Moment fromNow className="important">
-                {parseInt(event && event.date.$date.$numberLong)}
-              </Moment>
+              {tomorrow ? (
+                <span className="important">tomorrow</span>
+              ) : (
+                <Moment fromNow Now className="important">
+                  {parseInt(event && event.date.$date.$numberLong)}
+                </Moment>
+              )}
             </p>
-            <p>
+          </Header>
+          <p>
+            {event && event.day ? (
               <Moment format="Do of MMMM, YYYY">
                 {parseInt(event && event.date.$date.$numberLong)}
               </Moment>
-            </p>
-          </Header>
+            ) : (
+              <Moment format="h:mm A on Do of MMMM, YYYY">
+                {parseInt(event && event.date.$date.$numberLong)}
+              </Moment>
+            )}
+          </p>
         </Modal.Description>
       </Modal.Content>
       <Modal.Actions>
-        <Button
-          content="Close"
-          labelPosition="right"
-          icon="checkmark"
-          onClick={() => onClose()}
-          positive
-        />
+        <Button content="Close" onClick={() => onClose()} positive />
       </Modal.Actions>
     </Modal>
   );
