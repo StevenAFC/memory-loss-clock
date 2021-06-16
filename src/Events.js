@@ -10,7 +10,6 @@ const Events = (props) => {
 
   useEffect(() => {
     setInterval(() => {
-      console.log("mook");
       setLastChecked(moment().format());
     }, 2000000);
   }, []);
@@ -30,7 +29,8 @@ const Events = (props) => {
       <style>
         {`
       .today {
-        color: yellow !important;
+        background-color:rgba(255, 255, 0, 0.3);
+        border-radius: 3px;
         }
       }
     `}
@@ -48,8 +48,8 @@ const Events = (props) => {
               <List.Content>
                 <List.Header>{e.name}</List.Header>
                 <List.Description>
-                  {today ? (
-                    "Due today!"
+                  {today && e.day ? (
+                    "Today!"
                   ) : (
                     <span>
                       Due&nbsp;
