@@ -46,6 +46,11 @@ const Events = (props) => {
             "day"
           );
 
+          let tomorrow = moment(parseInt(e.date.$date.$numberLong)).isSame(
+            moment().add(1, "days"),
+            "day"
+          );
+
           return (
             <List.Item
               key={e._id.$oid}
@@ -64,9 +69,13 @@ const Events = (props) => {
                   ) : (
                     <span>
                       Due&nbsp;
-                      <Moment fromNow>
-                        {parseInt(e.date.$date.$numberLong)}
-                      </Moment>
+                      {tomorrow ? (
+                        <span>tomorrow</span>
+                      ) : (
+                        <Moment fromNow>
+                          {parseInt(e.date.$date.$numberLong)}
+                        </Moment>
+                      )}
                     </span>
                   )}
                 </List.Description>

@@ -8,8 +8,6 @@ const Event = ({ open, onClose, event }) => {
   let today = moment(time).isSame(new Date(), "day");
   let tomorrow = moment(time).isSame(moment().add(1, "days"), "day");
 
-  console.log(tomorrow);
-
   return (
     <Modal
       size="small"
