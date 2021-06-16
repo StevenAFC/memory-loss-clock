@@ -3,10 +3,14 @@ import EventDataServce from "./services/events-service";
 import { Segment, List } from "semantic-ui-react";
 import moment from "moment";
 import Moment from "react-moment";
+import Event from "./Event";
 
 const Events = (props) => {
   const [events, setEvents] = useState([]);
   const [lastChecked, setLastChecked] = useState(moment().format());
+
+  const [eventModalOpen, setEventModalOpen] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState(null);
 
   useEffect(() => {
     setInterval(() => {
@@ -29,13 +33,13 @@ const Events = (props) => {
       <style>
         {`
       .today {
-        background-color:rgba(255, 255, 0, 0.3);
-        border-radius: 3px;
+        background-color:rgba(255, 255, 0, 0.3) !important;
+        border-radius: 3px !important;
         }
       }
     `}
       </style>
-      <List celled inverted size="large">
+      <List selection celled inverted size="large">
         {events.map((e) => {
           let today = moment(parseInt(e.date.$date.$numberLong)).isSame(
             new Date(),
@@ -43,7 +47,14 @@ const Events = (props) => {
           );
 
           return (
-            <List.Item key={e._id.$oid} className={today ? "today" : null}>
+            <List.Item
+              key={e._id.$oid}
+              className={today ? "today" : null}
+              onClick={() => {
+                setSelectedEvent(e);
+                setEventModalOpen(true);
+              }}
+            >
               <List.Icon name={e.icon} verticalAlign="middle" />
               <List.Content>
                 <List.Header>{e.name}</List.Header>
@@ -69,6 +80,11 @@ const Events = (props) => {
         Last Updated:&nbsp;
         <Moment fromNow>{lastChecked}</Moment>
       </span>
+      <Event
+        open={eventModalOpen}
+        onClose={() => setEventModalOpen(false)}
+        event={selectedEvent}
+      />
     </Segment>
   );
 };
