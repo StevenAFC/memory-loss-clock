@@ -59,6 +59,7 @@ const Events = (props) => {
                 setSelectedEvent(e);
                 setEventModalOpen(true);
               }}
+              style={{ marginBottom: ".214em" }}
             >
               <List.Icon name={e.icon} verticalAlign="middle" />
               <List.Content>
