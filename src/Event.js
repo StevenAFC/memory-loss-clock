@@ -32,7 +32,7 @@ const Event = ({ open, onClose, event }) => {
         <Modal.Description>
           <Header>
             <p>
-              This event is on&nbsp;
+              This event is happening&nbsp;
               {!today ? (
                 <Moment format="dddd" className="important">
                   {parseInt(event && event.date.$date.$numberLong)}
@@ -48,13 +48,17 @@ const Event = ({ open, onClose, event }) => {
                   </Moment>
                 </React.Fragment>
               ) : null}
-              &nbsp;which is&nbsp;
-              {tomorrow ? (
-                <span className="important">tomorrow</span>
+              {event && event.day && today ? (
+                <span>!</span>
+              ) : tomorrow ? (
+                <span className="important">which is tomorrow</span>
               ) : (
-                <Moment fromNow Now className="important">
-                  {parseInt(event && event.date.$date.$numberLong)}
-                </Moment>
+                <React.Fragment>
+                  &nbsp;which is&nbsp;
+                  <Moment fromNow Now className="important">
+                    {parseInt(event && event.date.$date.$numberLong)}
+                  </Moment>
+                </React.Fragment>
               )}
             </p>
           </Header>
