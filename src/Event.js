@@ -51,7 +51,10 @@ const Event = ({ open, onClose, event }) => {
               {event && event.day && today ? (
                 <span>!</span>
               ) : tomorrow ? (
-                <span className="important">which is tomorrow</span>
+                <React.Fragment>
+                  <span>&nbsp;which is&nbsp;</span>
+                  <span className="important">tomorrow</span>
+                </React.Fragment>
               ) : (
                 <React.Fragment>
                   &nbsp;which is&nbsp;
